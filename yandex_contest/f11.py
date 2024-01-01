@@ -1,11 +1,5 @@
 def lists_sum(*args: list, unique=False):
-    summ = 0
-    if unique:
-        args_set = set()
-        for arg in args:
-            args_set = args_set | set(arg)
-        summ = sum(args_set)
-    else:
-        for arg in args:
-            summ += sum(arg)
-    return summ
+    list_nums = []
+    for nums in args:
+        list_nums.extend(nums)
+    return sum(list_nums) if not unique else sum(set(list_nums))

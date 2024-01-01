@@ -2,7 +2,7 @@ import re
 
 
 class Field(dict):
-    pattern_key = re.compile(r'([a-zA-Z][1-9][0-9]*$)|([1-9][0-9]*[a-zA-Z]$)')
+    __pattern_key = re.compile(r'([a-zA-Z][1-9][0-9]*$)|([1-9][0-9]*[a-zA-Z]$)')
 
     def __getitem__(self, key):
         Field.check(key)
@@ -41,13 +41,13 @@ class Field(dict):
         if not isinstance(key, (str, tuple)):
             raise TypeError
         if isinstance(key, str):
-            if cls.pattern_key.match(key) == None:
+            if cls.__pattern_key.match(key) == None:
                 raise ValueError
         elif isinstance(key, tuple):
             if len(key) != 2:
                 raise TypeError
             key = str(key[0]) + str(key[1])
-            if cls.pattern_key.match(key) == None:
+            if cls.__pattern_key.match(key) == None:
                 raise ValueError                
 
     @staticmethod

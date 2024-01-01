@@ -1,4 +1,4 @@
-def get_balance(name: str, transactions: list):
+def get_balance(name: str, transactions: list) -> int:
     balance = 0
     for transact in transactions:
         if transact['name'] == name:
@@ -6,13 +6,7 @@ def get_balance(name: str, transactions: list):
     return balance
 
 
-def count_debts(names: list, amount: int, transactions: list):
-    dict_homies = dict()
-    for name in names:
-        debt = get_balance(name, transactions) - amount
-        if debt >= 0:
-            debt = 0
-        else:
-            debt = abs(debt)
-        dict_homies[name] = debt
-    return dict_homies
+def count_debts(names: list, amount: int, transactions: list) -> dict:
+    debt_homies = {name: amount - get_balance(name, transactions) for name in names}
+    debt_homies = {name: 0 if debt < 0 else debt for name, debt in debt_homies.items()}
+    return debt_homies
